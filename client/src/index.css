@@ -7,8 +7,13 @@
 body {
   margin: 0;
   font-family: 'Electrolize', sans-serif;
+  overflow: hidden;  /* sayfada scroll olmasın diye */
 }
 
 .ant-btn-primary{
   background-color: #1677ff;
+}
+
+.categories::-webkit-scrollbar {   /* scrol gizli olsun diye */
+  display: none;
 }
