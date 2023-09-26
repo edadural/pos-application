@@ -1,14 +1,109 @@
 import { Button } from 'antd';
 import React from 'react';
-import { ClearOutlined } from '@ant-design/icons';
+import { ClearOutlined, PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 const CartTotals = () => {
     return (
         <div className='cart h-full max-h-[calc(100vh_-_90px)] flex flex-col'>
             <h2 className='bg-blue-600 text-center py-4 text-white font-bold tracking-wide'>Sepetteki Ürünler</h2>
-            <div className="cart-items">
-                <div className="cart-item">cart item</div>
-            </div>
+            <ul className="cart-items px-2 flex flex-col gap-y-3 pt-2 py-2 overflow-y-auto">
+                <li className="cart-item flex justify-between">
+                    <div className='flex items-center'>
+                        <img src='https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg' alt='' className='w-16 h-16 object-cover' />
+                        <div className='flex flex-col ml-2'>
+                            <b>Elma</b>
+                            <span>12₺ x 2</span>
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-x-1'>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<PlusCircleOutlined />}
+                        />
+                        <span>1</span>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<MinusCircleOutlined />}
+                        />
+                    </div>
+                </li>
+                <li className="cart-item flex justify-between">
+                    <div className='flex items-center'>
+                        <img src='https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg' alt='' className='w-16 h-16 object-cover' />
+                        <div className='flex flex-col ml-2'>
+                            <b>Elma</b>
+                            <span>12₺ x 2</span>
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-x-1'>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<PlusCircleOutlined />}
+                        />
+                        <span>1</span>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<MinusCircleOutlined />}
+                        />
+                    </div>
+                </li>
+                <li className="cart-item flex justify-between">
+                    <div className='flex items-center'>
+                        <img src='https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg' alt='' className='w-16 h-16 object-cover' />
+                        <div className='flex flex-col ml-2'>
+                            <b>Elma</b>
+                            <span>12₺ x 2</span>
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-x-1'>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<PlusCircleOutlined />}
+                        />
+                        <span>1</span>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<MinusCircleOutlined />}
+                        />
+                    </div>
+                </li>
+                <li className="cart-item flex justify-between">
+                    <div className='flex items-center'>
+                        <img src='https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg' alt='' className='w-16 h-16 object-cover' />
+                        <div className='flex flex-col ml-2'>
+                            <b>Elma</b>
+                            <span>12₺ x 2</span>
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-x-1'>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<PlusCircleOutlined />}
+                        />
+                        <span>1</span>
+                        <Button
+                            type='primary'
+                            size='small'
+                            className='w-full !rounded-full'
+                            icon={<MinusCircleOutlined />}
+                        />
+                    </div>
+                </li>
+            </ul>
             <div className="cart-totals mt-auto">
                 <div className='border-t border-b'>
                     <div className='flex justify-between p-2'>
