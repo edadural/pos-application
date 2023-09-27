@@ -9,15 +9,18 @@ body {
   font-family: 'Electrolize', sans-serif;
 }
 
+.ant-btn-primary {
+  background-color: #1677ff;
+}
+
 @media (min-width: 768px) {
-  body{
-    overflow: hidden;  /* sayfada scroll olmasın diye */
+  body {
+    overflow: hidden;
+    /* sayfada scroll olmasın diye */
   }
-  .ant-btn-primary{
-    background-color: #1677ff;
-  }
-  
-  .categories::-webkit-scrollbar {   /* scrol gizli olsun diye */
+
+  .categories::-webkit-scrollbar {
+    /* scrol gizli olsun diye */
     display: none;
   }
 }
