@@ -93,7 +93,7 @@ const StatisticPage = () => {
     return (
         <>
             <Header />
-            <div className="px-5">
+            <div className="px-5 md:pb-0 pb-16">
                 <h1 className="text-3xl font-bold text-center mb-3">İstatistiklerim</h1>
                 <div>
                     <h2 className='text-lg'>Hoş geldin <span className='text-green-700 font-bold'>admin</span>.</h2>
@@ -119,11 +119,11 @@ const StatisticPage = () => {
                             img="images/product.png"
                         />
                     </div>
-                    <div className='flex justify-between'>
-                        <div>
+                    <div className='flex justify-between gap-10 lg:flex-row flex-col items-center'>
+                        <div className='lg:w-1/2 lg:h-full h-72'>
                             <Area {...config} />
                         </div>
-                        <div>
+                        <div className='lg:w-1/2 lg:h-full h-72'>
                             <Pie {...config2} />
                         </div>
                     </div>
