@@ -1,11 +1,23 @@
 const express = require("express");
-
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const app = express();
-
 const port = 5000;
 
-app.get("/", (req,res)=>res.send("Hello"))
+dotenv.config();
 
-app.listen(port, ()=> {
+const connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("Connected to mongoDB");
+    } catch (error) {
+        throw error;
+    }
+}
+
+app.get("/", (req, res) => res.send("Hello"))
+
+app.listen(port, () => {
+    connect();
     console.log(`Example app listening on port ${port}`);
 });
