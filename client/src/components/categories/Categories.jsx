@@ -1,26 +1,12 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, message } from 'antd';
 import { useState } from 'react';
+import { PlusOutlined, EditOutlined } from '@ant-design/icons';
+import Add from './Add';
+import Edit from './Edit';
 import "./style.css";
 
 const Categories = ({ categories, setCategories }) => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const [form] = Form.useForm();
-
-    const onFinish = (values) => {
-        try {
-            fetch("http://localhost:5000/api/categories/add-category", {
-                method: "POST",
-                body: JSON.stringify(values),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            });
-            message.success("Kategori başarıyla eklendi.");
-            form.resetFields();
-            setCategories([...categories, values]);  // tüm kategorileri al eklenenleri values eklesin
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     return (
         <ul className="flex gap-4 md:flex-col text-lg">
@@ -34,30 +20,22 @@ const Categories = ({ categories, setCategories }) => {
                 onClick={() => setIsAddModalOpen(true)}>
                 <PlusOutlined className='md:text-2xl' />
             </li>
+            <li
+                className="category-item !bg-slate-700 hover:opacity-90"
+                onClick={() => setIsEditModalOpen(true)}>
+                <EditOutlined className='md:text-2xl' />
+            </li>
 
-            <Modal
-                title="Yeni kategori Ekle"
-                open={isAddModalOpen}
-                onCancel={() => setIsAddModalOpen(false)}
-                footer={false}
-            >
-                <Form layout="vertical" onFinish={onFinish} form={form}>
-                    <Form.Item
-                        name="title"
-                        label="Kategori Ekle"
-                        rules={[{
-                            required: true,
-                            message: "Kategori Alanı Boş geçilemez!"
-                        }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item className='flex justify-end mb-0'>
-                        <Button type='primary' htmlType='submit'>Oluştur</Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
-
+            <Add
+                isAddModalOpen={isAddModalOpen}
+                setIsAddModalOpen={setIsAddModalOpen}
+                categories={categories}
+                setCategories={setCategories}
+            />
+            <Edit
+                isEditModalOpen={isEditModalOpen}
+                setIsEditModalOpen={setIsEditModalOpen}
+            />
         </ul>
     )
 }
