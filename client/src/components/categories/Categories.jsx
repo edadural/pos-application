@@ -3,7 +3,7 @@ import { Button, Form, Input, Modal, message } from 'antd';
 import { useState } from 'react';
 import "./style.css";
 
-const Categories = () => {
+const Categories = ({ categories, setCategories }) => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [form] = Form.useForm();
 
@@ -16,6 +16,7 @@ const Categories = () => {
             });
             message.success("Kategori başarıyla eklendi.");
             form.resetFields();
+            setCategories([...categories, values]);  // tüm kategorileri al eklenenleri values eklesin
         } catch (error) {
             console.log(error);
         }
@@ -23,27 +24,11 @@ const Categories = () => {
 
     return (
         <ul className="flex gap-4 md:flex-col text-lg">
-            <li className="bg-green-900 px-6 md:py-3 py-6 text-white cursor-pointer hover:bg-pink-700 transition-all text-center min-w-[145px]">
-                <span>Tümü</span>
-            </li>
-            <li className="category-item">
-                <span>Yiyecek</span>
-            </li>
-            <li className="category-item">
-                <span>İçecek</span>
-            </li>
-            <li className="category-item">
-                <span>Yiyecek</span>
-            </li>
-            <li className="category-item">
-                <span>İçecek</span>
-            </li>
-            <li className="category-item">
-                <span>İçecek</span>
-            </li>
-            <li className="category-item">
-                <span>Yiyecek</span>
-            </li>
+            {categories.map((item) => (
+                <li className="category-item" key={item._id}>
+                    <span>{item.title}</span>
+                </li>
+            ))}
             <li
                 className="category-item !bg-slate-500 hover:opacity-90"
                 onClick={() => setIsAddModalOpen(true)}>
