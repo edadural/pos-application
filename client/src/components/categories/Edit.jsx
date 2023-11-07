@@ -20,9 +20,26 @@ const Edit = ({ categories, setCategories, isEditModalOpen, setIsEditModalOpen }
             }));
         } catch (error) {
             console.log(error);
-            message.success("Bir şeyler yanlış gitti.");
+            message.error("Bir şeyler yanlış gitti.");
         }
     }
+
+    const deleteCategory = (id) => {
+        if (window.confirm("Emin misiniz?")) {
+            try {
+                fetch("http://localhost:5000/api/categories/delete-category", {
+                    method: "DELETE",
+                    body: JSON.stringify({ categoryId: id }),
+                    headers: { "Content-type": "application/json; charset=UTF-8" },
+                });
+                message.success("Kategori başarıyla silindi.");
+                setCategories(categories.filter((item)=> item._id !== id ));            // filter - istenen sonuçları döndürür, gönderdiğim id  dönen id eşit değilse categry e onun dışındakileri gönder
+            } catch (error) {
+                console.log(error);
+                message.error("Bir şeyler yanlış gitti.");
+            }
+        }
+    };
 
     const colums = [
         {
@@ -43,7 +60,7 @@ const Edit = ({ categories, setCategories, isEditModalOpen, setIsEditModalOpen }
         {
             title: "Action",
             dataIndex: "action",
-            render: (text, record) => {
+            render: (_, record) => {
                 return (
                     <div>
                         <Button type='link' onClick={() => setEditingRow(record)} className='pl-0'>
@@ -52,7 +69,7 @@ const Edit = ({ categories, setCategories, isEditModalOpen, setIsEditModalOpen }
                         <Button type='link' htmlType='submit' className='text-gray-500'>
                             Kaydet
                         </Button>
-                        <Button type='link' danger>
+                        <Button type='link' onClick={() => deleteCategory(record._id)} danger>
                             Sil
                         </Button>
                     </div>
