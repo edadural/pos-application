@@ -1,150 +1,36 @@
+import { useEffect, useState } from "react";
+
 const Products = () => {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products/get-all");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+
   return (
     <div className="products-wrapper grid grid-cols-card gap-4 ">
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
+      {products.map((item) => (
+        <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
+          <div className="product-img">
+            <img src={item.img} alt="" className="h-28 object-cover w-full border-b" />
+            <div className="product-info flex flex-col p-2">
+              <span className="font-bold">{item.title}</span>
+              <span>{item.price}₺</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
-      <div className="product-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="product-img">
-          <img src="https://www.igrus.com/wp-content/uploads/2021/06/Screenshot_16-10.jpg" alt="" className="h-28 object-cover w-full border-b" />
-          <div className="product-info flex flex-col p-2">
-            <span className="font-bold">Elma</span>
-            <span>12₺</span>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   )
 }
