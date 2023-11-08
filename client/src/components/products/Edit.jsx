@@ -60,16 +60,16 @@ const Edit = () => {
         }
     }
 
-    const deleteCategory = (id) => {
+    const deleteProduct = (id) => {
         if (window.confirm("Emin misiniz?")) {
             try {
-                fetch("http://localhost:5000/api/categories/delete-category", {
+                fetch("http://localhost:5000/api/products/delete-product", {
                     method: "DELETE",
-                    body: JSON.stringify({ categoryId: id }),
+                    body: JSON.stringify({ productId: id }),
                     headers: { "Content-type": "application/json; charset=UTF-8" },
                 });
-                message.success("Kategori başarıyla silindi.");
-                setCategories(categories.filter((item) => item._id !== id));            // filter - istenen sonuçları döndürür, gönderdiğim id  dönen id eşit değilse categry e onun dışındakileri gönder
+                message.success("Ürün başarıyla silindi.");
+                setProducts(products.filter((item) => item._id !== id));
             } catch (error) {
                 console.log(error);
                 message.error("Bir şeyler yanlış gitti.");
@@ -123,7 +123,7 @@ const Edit = () => {
                         </Button>
                         <Button
                             type='link'
-                            onClick={() => deleteCategory(record._id)}
+                            onClick={() => deleteProduct(record._id)}
                             danger
                         >
                             Sil
