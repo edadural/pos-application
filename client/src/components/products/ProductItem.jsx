@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { addProduct } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux"
 
@@ -7,6 +8,7 @@ const ProductItem = ({ item }) => {
 
     const handleClick = () => {
         dispatch(addProduct({...item, quantity: 1}));  // item ın hepsini gonder
+        message.success("Ürün sepete eklendi.")
     };
 
     return (

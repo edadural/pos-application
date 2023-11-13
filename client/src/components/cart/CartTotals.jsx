@@ -1,9 +1,9 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import React from 'react';
 import { ClearOutlined, PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { deleteCart, increase, decrease } from '../../redux/cartSlice';
+import { deleteCart, increase, decrease, reset } from '../../redux/cartSlice';
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
@@ -21,7 +21,10 @@ const CartTotals = () => {
                                     src={item.img}
                                     alt=''
                                     className='w-14 h-14 object-cover cursor-pointer'
-                                    onClick={() => dispatch(deleteCart(item))}
+                                    onClick={() => {
+                                        dispatch(deleteCart(item));
+                                        message.success("Ürün sepetten silindi.");
+                                    }}
                                 />
                                 <div className='flex flex-col ml-2'>
                                     <b>{item.title}</b>
@@ -34,7 +37,10 @@ const CartTotals = () => {
                                     size='small'
                                     className='w-full !rounded-full'
                                     icon={<PlusCircleOutlined />}
-                                    onClick={() => dispatch(increase(item))}
+                                    onClick={() => {
+                                        dispatch(increase(item));
+                                        message.success("Ürün sepete eklendi.")
+                                    }}
                                 />
                                 <span className='font-bold w-6 inline-block text-center'>{item.quantity}</span>
                                 <Button
@@ -46,10 +52,12 @@ const CartTotals = () => {
                                         if (item.quantity === 1) {
                                             if (window.confirm("Ürün silinsin mi?")) {
                                                 dispatch(decrease(item));
+                                                message.success("Ürün sepetten silindi.");
                                             }
                                         }
                                         if (item.quantity > 1) {
                                             dispatch(decrease(item));
+                                            message.success("Ürün sepetten silindi.");
                                         }
                                     }}
                                 />
@@ -92,10 +100,28 @@ const CartTotals = () => {
                     </div>
                 </div>
                 <div className='py-2 px-2'>
-                    <Button type='primary' size='large' className='w-full'>
+                    <Button
+                        type='primary'
+                        size='large'
+                        className='w-full'
+                        disabled={cart.cartItems.length === 0}
+                    >
                         Sipariş Oluştur
                     </Button>
-                    <Button type='primary' size='large' className='w-full mt-2' icon={<ClearOutlined />} danger>
+                    <Button
+                        type='primary'
+                        size='large'
+                        className='w-full mt-2'
+                        icon={<ClearOutlined />}
+                        danger
+                        disabled={cart.cartItems.length === 0}
+                        onClick={() => {
+                            if (window.confirm("Emin misiniz?")) {
+                                dispatch(reset());
+                                message.success("Sepet başarıyla temizlendi.")
+                            }
+                        }}
+                    >
                         Temizle
                     </Button>
                 </div>
