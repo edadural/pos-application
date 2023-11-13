@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <div className="home px-6 flex md:flex-row flex-col justify-between gap-10 md:pb-0 pb-20">
+      <div className="home px-6 flex md:flex-row flex-col justify-between gap-10 md:pb-0 pb-20 h-screen">
         <div className="categories overflow-auto max-h-[calc(100vh_-_85px)] md:pb-10">
           <Categories categories={categories} setCategories={setCategories} />
         </div>
@@ -38,7 +38,7 @@ const HomePage = () => {
         <div className="cart-wrapper min-w-[300px] md:-mr-[24px] md:-mt-[30px] border">
           <CartTotals />
         </div>
-      </div>F
+      </div>
     </>
   )
 }
