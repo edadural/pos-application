@@ -2,12 +2,11 @@ import { addProduct } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux"
 
 const ProductItem = ({ item }) => {
-    // const cart = useSelector((state) => state.cart);  // sürekli props yazmama gerek yok, kullancağm yere ekleyebilirim
 
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(addProduct(item));
+        dispatch(addProduct({...item, quantity: 1}));  // item ın hepsini gonder
     };
 
     return (
