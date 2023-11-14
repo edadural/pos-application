@@ -1,40 +1,64 @@
-import { Button, Card, Table } from "antd";
+import { Button, Table } from "antd";
 import Header from "../components/header/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PrintBill from "../components/bills/PrintBill";
 
 const BillPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Mike',
-            age: 32,
-            address: '10 Downing Street',
-        },
-        {
-            key: '2',
-            name: 'John',
-            age: 42,
-            address: '10 Downing Street',
-        },
-    ];
+    const [billItems, setBillItems] = useState(false);
+
+    useEffect(() => {
+        const getBills = async () => {
+            try {
+                const res = await fetch("http://localhost:5000/api/bills/get-all");
+                const data = await res.json();
+                setBillItems(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getBills();
+    }, []);
 
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Müşteri Adı',
+            dataIndex: 'customerName',
+            key: 'customerName',
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Telefon Numarası',
+            dataIndex: 'customerPhoneNumber',
+            key: 'customerPhoneNumber',
         },
         {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Oluşturma Tarihi',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (text) => {
+                return <span>{text.substring(0, 10)}</span>
+            }
+        },
+        {
+            title: 'Ödeme Yöntemi',
+            dataIndex: 'paymentMode',
+            key: 'paymentMode',
+        },
+        {
+            title: 'Toplam Fiyat',
+            dataIndex: 'totalAmount',
+            key: 'totalAmount',
+            render: (text) => {
+                return <span>{text}₺</span>
+            }
+        },
+        {
+            title: 'Actions',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text) => {
+                return <Button type="link" className="pl-0" onClick={()=>setIsModalOpen(true)}>Yazdır</Button>
+            }
         },
     ];
 
@@ -43,19 +67,12 @@ const BillPage = () => {
             <Header />
             <div className="px-6">
                 <h1 className="text-3xl font-bold text-center mb-3">Faturalar</h1>
-                <Table dataSource={dataSource} columns={columns} bordered pagination={false} />
-                <div className="cart-total flex justify-end mt-4">
-                    <Card className="w-72">
-                        <Button
-                            className="mt-4 w-full"
-                            type="primary"
-                            size="large"
-                            onClick={() => setIsModalOpen(true)}
-                        >
-                            Yazdır
-                        </Button>
-                    </Card>
-                </div>
+                <Table
+                    dataSource={billItems}
+                    columns={columns}
+                    bordered
+                    pagination={false}
+                />
             </div>
             <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </>
