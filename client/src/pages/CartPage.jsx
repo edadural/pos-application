@@ -128,22 +128,50 @@ const CartPage = () => {
                     columns={columns}
                     bordered
                     pagination={false}
+                    scroll={{
+                        x: 1200,
+                        y: 300,
+                    }}
+                    rowKey={record => record._id}
                 />
                 <div className="cart-total flex justify-end mt-4">
                     <Card className="w-72">
                         <div className="flex justify-between">
                             <span>Ara Toplam</span>
-                            <span>549.00₺</span>
+                            <span>
+                                {cart.total > 0
+                                    ? cart.total.toFixed(2)
+                                    : 0}
+                                ₺
+                            </span>
                         </div>
                         <div className="flex justify-between my-2">
-                            <span>KDV Toplam %8</span>
-                            <span className="text-red-600">+43.92₺</span>
+                            <span>KDV %{cart.tax}</span>
+                            <span className='text-red-500'>
+                                {(cart.total * cart.tax) / 100 > 0
+                                    ? `+${((cart.total * cart.tax) / 100).toFixed(2)}`
+                                    : 0}
+                                ₺
+                            </span>
                         </div>
                         <div className="flex justify-between">
-                            <b>Toplam</b>
-                            <b>549.00₺</b>
+                            <b>Genel Toplam</b>
+                            <span className='text-xl'>
+                                {cart.total + (cart.total * cart.tax) / 100 > 0
+                                    ? (cart.total + (cart.total * cart.tax) / 100).toFixed(2)
+                                    : 0}
+                                ₺
+                            </span>
                         </div>
-                        <Button className="mt-4 w-full" type="primary" size="large" onClick={() => setIsModalOpen(true)}>Sipariş Oluştur</Button>
+                        <Button
+                            className="mt-4 w-full"
+                            type="primary"
+                            size="large"
+                            onClick={() => setIsModalOpen(true)}
+                            disabled={cart.cartItems.length === 0}
+                        >
+                            Sipariş Oluştur
+                        </Button>
                     </Card>
                 </div>
             </div>
