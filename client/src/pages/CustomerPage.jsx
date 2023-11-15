@@ -49,6 +49,10 @@ const CustomerPage = () => {
                     columns={columns}
                     bordered
                     agination={false}
+                    scroll={{
+                        x: 1000,
+                        y: 300
+                    }}
                 />
             </div>
         </>
