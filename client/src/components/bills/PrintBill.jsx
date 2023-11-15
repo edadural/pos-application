@@ -1,6 +1,13 @@
-import { Button, Modal } from "antd"
+import { Button, Modal } from "antd";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
+    const componentRef = useRef();
+
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
     return (
         <div>
@@ -11,7 +18,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                 onCancel={() => setIsModalOpen(false)}
                 width={800}
             >
-                <section className="py-12 bg-black">
+                <section className="py-12 bg-black" ref={componentRef}>
                     <div className="max-w-5xl mx-auto bg-white px-6">
                         <article className="overflow-hidden">
                             <div className="logo my-5">
@@ -21,7 +28,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                                 <div className="grid sm:grid-cols-4 grid-cols-3 gap-12">
                                     <div className="text-sm text-slate-500">
                                         <p className="font-bold text-slate-700">Fatura Detayı:</p>
-                                        <p>Unwrapped</p>
+                                        <p className="text-green-700">{customer.customerName}</p>
                                         <p>Fake Street 123</p>
                                         <p>San Javier</p>
                                         <p>CA 1234</p>
@@ -101,17 +108,18 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                                     <tbody>
                                         {customer?.cartItems.map((item) => (
                                             <tr className="border-b border-slate-200">
-                                                <td className="py-3 sm:table-cell hidden">
+                                                <td className="py-4 sm:table-cell hidden">
                                                     <img
                                                         src={item.img}
                                                         alt=""
-                                                        className="w-12 h-12 object-cover" />
+                                                        className="w-12 h-12 object-cover"
+                                                    />
                                                 </td>
                                                 <td className="py-4 sm:table-cell hidden">
                                                     <div className="flex flex-col">
                                                         <span className="font-medium">{item.title}</span>
                                                         <span className="sm:hidden inline-block text-xs">
-                                                            Birim Fiyatı {item.price.toFixed(2)}₺
+                                                            Birim Fiyatı {item.price}₺
                                                         </span>
                                                     </div>
                                                 </td>
@@ -119,18 +127,18 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                                                     <div className="flex flex-col">
                                                         <span className="font-medium">{item.title}</span>
                                                         <span className="sm:hidden inline-block text-xs">
-                                                            Birim Fiyatı {item.price.toFixed(2)}₺
+                                                            Birim Fiyatı {item.price}₺
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td className="py-3 text-center sm:table-cell hidden">
-                                                    <span>{item.price.toFixed(2)}₺</span>
+                                                <td className="py-4 text-center sm:table-cell hidden">
+                                                    <span>{item.price}₺</span>
                                                 </td>
-                                                <td className="py-3 sm:text-center text-right sm:table-cell hidden">
+                                                <td className="py-4 sm:text-center text-right sm:table-cell hidden">
                                                     <span>{item.quantity}</span>
                                                 </td>
-                                                <td className="py-3 text-end">
-                                                    <span>{(item.price * item.quantity).toFixed(2)}₺</span>
+                                                <td className="py-4 text-end">
+                                                    <span>{(item.price * item.quantity)}₺</span>
                                                 </td>
                                             </tr>
                                         ))}
@@ -226,7 +234,11 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                     </div>
                 </section>
                 <div className="flex justify-end mt-2">
-                    <Button type="primary" size="large">
+                    <Button
+                        type="primary"
+                        size="large"
+                        onClick={handlePrint}
+                    >
                         Yazdır
                     </Button>
                 </div>
