@@ -252,7 +252,7 @@ const CartPage = () => {
                     pagination={false}
                     scroll={{
                         x: 1200,
-                        y: 300,
+                        y: 360,
                     }}
                     rowKey={record => record._id}
                 />

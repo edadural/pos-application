@@ -51,39 +51,49 @@ const Header = ({ setSearch }) => {
         <div className="menu-links">
           <Link
             to={"/"}
-            className="menu-link">
+            className={`menu-link ${
+              pathname === "/" && "active"
+            }`}>
             <HomeOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px] pt-1">Ana Sayfa</span>
           </Link>
           <Badge count={cart.cartItems.length} className='md:flex hidden'>
             <Link
               to={"/cart"}
-              className='menu-link'>
+              className={`menu-link ${
+                pathname === "/cart" && "active"
+              }`}>
               <ShoppingCartOutlined className='md:text-2xl text-xl' />
               <span className='md:text-xs text-[10px] pt-1'>Sepet</span>
             </Link>
           </Badge>
           <Link
             to={"/bills"}
-            className='menu-link'>
+            className={`menu-link ${
+              pathname === "/bills" && "active"
+            }`}>
             <CopyOutlined className='md:text-2xl text-xl' />
             <span className='md:text-xs text-[10px] pt-1'>Faturalar</span>
           </Link>
           <Link
             to={"/customers"}
-            className='menu-link'>
+            className={`menu-link ${
+              pathname === "/customers" && "active"
+            }`}>
             <UserOutlined className='md:text-2xl text-xl' />
             <span className='md:text-xs text-[10px] pt-1'>Müşteriler</span>
           </Link>
           <Link
             to={"/statistic"}
-            className='menu-link'>
+            className={`menu-link ${
+              pathname === "/statistic" && "active"
+            }`}>
             <BarChartOutlined className='md:text-2xl text-xl' />
             <span className='md:text-xs text-[10px] pt-1'>İstatistikler</span>
           </Link>
           <div onClick={logOut}>
             <Link
-              className='menu-link'>
+              className="menu-link">
               <LogoutOutlined className='md:text-2xl text-xl' />
               <span className='md:text-xs text-[10px] pt-1'>Çıkış</span>
             </Link>
@@ -91,8 +101,10 @@ const Header = ({ setSearch }) => {
         </div>
         <Badge count={cart.cartItems.length} className='md:hidden flex'>
           <Link
-            to={"/"}
-            className='menu-link'>
+            to={"/cart"}
+            className={`menu-link ${
+              pathname === "/cart" && "active"
+            }`}>
             <ShoppingCartOutlined className='text-2xl' />
             <span className='md:text-xs text-[10px] pt-1'>Sepet</span>
           </Link>
