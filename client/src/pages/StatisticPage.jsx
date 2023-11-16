@@ -6,6 +6,7 @@ import { Area, Pie } from '@ant-design/plots';
 const StatisticPage = () => {
     const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
+    const user = JSON.parse(localStorage.getItem("posUser"));
 
     useEffect(() => {
         asyncFetch();
@@ -13,16 +14,16 @@ const StatisticPage = () => {
 
     useEffect(() => {
         const getProducts = async () => {
-          try {
-            const res = await fetch("http://localhost:5000/api/products/get-all");
-            const data = await res.json();
-            setProducts(data);
-          } catch (error) {
-            console.log(error);
-          }
+            try {
+                const res = await fetch("http://localhost:5000/api/products/get-all");
+                const data = await res.json();
+                setProducts(data);
+            } catch (error) {
+                console.log(error);
+            }
         };
         getProducts();
-      }, []);
+    }, []);
 
     const asyncFetch = () => {
         fetch("http://localhost:5000/api/bills/get-all")
@@ -91,7 +92,7 @@ const StatisticPage = () => {
             <div className="px-5 md:pb-0 pb-16">
                 <h1 className="text-3xl font-bold text-center mb-3">İstatistiklerim</h1>
                 <div>
-                    <h2 className='text-lg'>Hoş geldin <span className='text-green-700 font-bold'>admin</span>.</h2>
+                    <h2 className='text-lg'>Hoş geldin <span className='text-green-700 font-bold'>{user.username}</span>.</h2>
                     <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 md:gap-6 gap-3">
                         <StatisticCard
                             title={"Toplam Müşteri"}
@@ -115,10 +116,10 @@ const StatisticPage = () => {
                         />
                     </div>
                     <div className='flex justify-between gap-10 lg:flex-row flex-col items-center'>
-                        <div className='lg:w-1/2 lg:h-full h-72'>
+                        <div className='lg:w-1/2 lg:h-80 h-72'>
                             <Area {...config} />
                         </div>
-                        <div className='lg:w-1/2 lg:h-full h-72'>
+                        <div className='lg:w-1/2 lg:h-80 h-72'>
                             <Pie {...config2} />
                         </div>
                     </div>
@@ -128,4 +129,4 @@ const StatisticPage = () => {
     )
 }
 
-export default StatisticPage
+export default StatisticPage;
