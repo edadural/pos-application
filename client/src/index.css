@@ -24,4 +24,8 @@ body {
     /* scrol gizli olsun diye */
     display: none;
   }
+  
+  .products::-webkit-scrollbar {
+    display: none;
+  }
 }

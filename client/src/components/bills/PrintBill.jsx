@@ -28,7 +28,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                                 <div className="grid sm:grid-cols-4 grid-cols-3 gap-12">
                                     <div className="text-sm text-slate-500">
                                         <p className="font-bold text-slate-700">Fatura Detayı:</p>
-                                        <p className="text-green-700">{customer.customerName}</p>
+                                        <p className="text-green-700">{customer?.customerName}</p>
                                         <p>Fake Street 123</p>
                                         <p>San Javier</p>
                                         <p>CA 1234</p>
@@ -132,13 +132,13 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                                                     </div>
                                                 </td>
                                                 <td className="py-4 text-center sm:table-cell hidden">
-                                                    <span>{item.price}₺</span>
+                                                    <span>{item.price.toFixed(2)}₺</span>
                                                 </td>
                                                 <td className="py-4 sm:text-center text-right sm:table-cell hidden">
                                                     <span>{item.quantity}</span>
                                                 </td>
                                                 <td className="py-4 text-end">
-                                                    <span>{(item.price * item.quantity)}₺</span>
+                                                    <span>{(item.price * item.quantity).toFixed(2)}₺</span>
                                                 </td>
                                             </tr>
                                         ))}
