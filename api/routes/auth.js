@@ -14,7 +14,7 @@ router.post("/register", async (req, res) => {
             password: hashedPassword,
         });
         await newUser.save();
-        res.status(200).json("A new user created successfully.");
+        res.status(200).json("Yeni bir kullanıcı başarıyla oluşturuldu.");
     } catch (error) {
         res.status(500).json(error);
     }
@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            return res.status(404).send({ error: "User not found!" });
+            return res.status(404).send({ error: "Kullanıcı bulunamadı!" });
         }
 
         const validPassword = await bcrypt.compare(   // iki sifreyi karsilastirma
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
         );
 
         if (!validPassword) {
-            res.status(403).json("Invalid password!");
+            res.status(403).json("Geçersiz şifre!");
         } else {
             res.status(200).json(user);
         }
